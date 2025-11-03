@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>PentaHire</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        darkMode: 'class',
+      }
+    </script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Lato:wght@400;700&family=Merriweather:wght@400;700&family=Montserrat:wght@400;500;700&family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <style>
+      body {
+        font-family: 'Inter', sans-serif;
+      }
+      .font-lato { font-family: 'Lato', sans-serif; }
+      .font-merriweather { font-family: 'Merriweather', serif; }
+      .font-montserrat { font-family: 'Montserrat', sans-serif; }
+      .font-roboto { font-family: 'Roboto', sans-serif; }
+      .font-inter { font-family: 'Inter', sans-serif; }
+      /* ATS-friendly system fonts */
+      .font-arial { font-family: Arial, Helvetica, sans-serif; }
+      .font-times-new-roman { font-family: 'Times New Roman', Times, serif; }
+      .font-georgia { font-family: Georgia, serif; }
+      .font-verdana { font-family: Verdana, Geneva, Tahoma, sans-serif; }
+      .font-calibri { font-family: Calibri, Candara, Segoe, 'Segoe UI', Optima, Arial, sans-serif; }
+
+      [contenteditable][data-placeholder]:empty:before {
+          content: attr(data-placeholder);
+          color: #64748b; /* slate-500 */
+          opacity: 0.7;
+          pointer-events: none; /* Make sure the placeholder text is not interactive */
+      }
+
+      .dark [contenteditable][data-placeholder]:empty:before {
+          color: #94a3b8; /* slate-400 */
+      }
+      
+      /* --- Cross-browser compatibility styles --- */
+      * {
+        box-sizing: border-box;
+      }
+
+      /* Custom scrollbar for Webkit browsers (Chrome, Safari) */
+      ::-webkit-scrollbar {
+        width: 8px;
+        height: 8px;
+      }
+      ::-webkit-scrollbar-track {
+        background: #f1f5f9; /* slate-100 */
+      }
+      ::-webkit-scrollbar-thumb {
+        background: #94a3b8; /* slate-400 */
+        border-radius: 4px;
+      }
+      ::-webkit-scrollbar-thumb:hover {
+        background: #64748b; /* slate-500 */
+      }
+      .dark ::-webkit-scrollbar-track {
+        background: #1e293b; /* slate-800 */
+      }
+      .dark ::-webkit-scrollbar-thumb {
+        background: #475569; /* slate-600 */
+      }
+      .dark ::-webkit-scrollbar-thumb:hover {
+        background: #64748b; /* slate-500 */
+      }
+
+      /* Custom scrollbar for Firefox */
+      html {
+        scrollbar-width: thin;
+        scrollbar-color: #94a3b8 #f1f5f9; /* thumb track */
+      }
+      .dark html {
+        scrollbar-color: #475569 #1e293b; /* thumb track */
+      }
+      
+      /* Fallback for CSS aspect-ratio property */
+      .resume-aspect-ratio-wrapper {
+        position: relative;
+        width: 100%;
+        /* Fallback for browsers that do not support aspect-ratio */
+        padding-top: 141.42%; /* 11 / 8.5 * 100% */
+      }
+
+      .resume-aspect-ratio-wrapper > div {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+      }
+      
+      @supports (aspect-ratio: 8.5 / 11) {
+        .resume-aspect-ratio-wrapper {
+          padding-top: 0;
+          aspect-ratio: 8.5 / 11;
+        }
+         .resume-aspect-ratio-wrapper > div {
+          position: static;
+         }
+      }
+
+      /* --- Highlight animation for AI suggestions --- */
+      @keyframes highlight-pulse {
+        0% { box-shadow: 0 0 0 0px rgba(59, 130, 246, 0.5); }
+        100% { box-shadow: 0 0 0 8px rgba(59, 130, 246, 0); }
+      }
+
+      .highlight-update {
+        animation: highlight-pulse 1s ease-out;
+      }
+
+      .avoid-break {
+        break-inside: avoid;
+        page-break-inside: avoid; /* For older browsers */
+      }
+    </style>
+  <script type="importmap">
+{
+  "imports": {
+    "react": "https://aistudiocdn.com/react@^19.2.0",
+    "react-dom/": "https://aistudiocdn.com/react-dom@^19.2.0/",
+    "react/": "https://aistudiocdn.com/react@^19.2.0/",
+    "@google/genai": "https://aistudiocdn.com/@google/genai@^1.27.0",
+    "jspdf": "https://aistudiocdn.com/jspdf@^3.0.3",
+    "docx": "https://aistudiocdn.com/docx@^9.5.1",
+    "file-saver": "https://aistudiocdn.com/file-saver@^2.0.5",
+    "uuid": "https://aistudiocdn.com/uuid@^13.0.0"
+  }
+}
+</script>
+</head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/index.tsx"></script>
+  </body>
+</html>
